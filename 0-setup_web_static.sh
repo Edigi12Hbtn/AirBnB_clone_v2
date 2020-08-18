@@ -6,7 +6,8 @@ sudo mkdir -p /data/web_static/shared /data/web_static/releases/test
 echo -e "<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\n</html>" > /data/web_static/releases/test/index.html
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data
-LINE_TO_REPL="server_name _;"
-REPLACE_FOR="server_name _;\n\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}"
-sudo sed -i "s:$LINE_TO_REPL:$REPLACE_FOR:" /etc/nginx/sites-available/default
+LINE_TO_REPL="# pass the PHP scripts to FastCGI server listening on 127.0.0.1\:9000"
+REPLACE_FOR="\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n\n# pass the PHP scripts to FastCGI server listening on 127.0.0.1\:9000"
+sudo sed -i "s:$LINE_TO_REPL:$REPLACE_FOR:" /etc/nginx/sites-enabled/default
 sudo service nginx restart
+
