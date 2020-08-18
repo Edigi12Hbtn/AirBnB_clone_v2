@@ -28,19 +28,22 @@ def do_deploy(archive_path):
     if not exists(archive_path):
         return False
 
-    put(archive_path, "/tmp/")
-    name_of_file = archive_path.split('/')[-1]
-    name = name_of_file.split('.')[0]  # name withouth extension.
-    final_path = "/data/web_static/releases/" + name
-    run("mkdir -p " + final_path)
-    run("tar -xzf /tmp/" + name_of_file + " -C " + final_path)
-    run("rm /tmp/" + name_of_file)
+    try:
+        put(archive_path, "/tmp/")
+        name_of_file = archive_path.split('/')[-1]
+        name = name_of_file.split('.')[0]  # name withouth extension.
+        final_path = "/data/web_static/releases/" + name
+        run("mkdir -p " + final_path)
+        run("tar -xzf /tmp/" + name_of_file + " -C " + final_path)
+        run("rm /tmp/" + name_of_file)
 
-    run("mv " + final_path + "/web_static/* " + final_path)
-    run("rm -rf /data/web_static/current")
-    run("rm -rf " + final_path + "/web_static/")
-    run("ln -s {} /data/web_static/current".format(final_path))
+        run("mv " + final_path + "/web_static/* " + final_path)
+        run("rm -rf /data/web_static/current")
+        run("rm -rf " + final_path + "/web_static/")
+        run("ln -s {} /data/web_static/current".format(final_path))
 
-    disconnect_all()
+        disconnect_all()
+    except:
+        return False
 
     return True
