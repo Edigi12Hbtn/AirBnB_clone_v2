@@ -34,9 +34,10 @@ def do_deploy(archive_path):
     run("mkdir -p " + final_path)
     run("tar -xzf /tmp/" + name_of_file + " -C " + final_path)
     run("rm /tmp/" + name_of_file)
-    # Falta mv?
-    # Falta rm -rf web_static
+
+    run("mv " + final_path + "/web_static/* " + final_path)
     run("rm -rf /data/web_static/current")
+    run("rm -rf " + final_path + "/web_static/")
     run("ln -s {} /data/web_static/current".format(final_path))
 
     return True
