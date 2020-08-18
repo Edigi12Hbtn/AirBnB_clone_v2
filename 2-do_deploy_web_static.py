@@ -6,6 +6,7 @@ Fabric script that distributes an archive to your
 from fabric.api import local, put, run, env
 from datetime import datetime
 from os.path import exists
+from fabric.network import disconnect_all
 
 env.hosts = ['35.196.1.33', '35.243.140.125']
 
@@ -39,5 +40,7 @@ def do_deploy(archive_path):
     run("rm -rf /data/web_static/current")
     run("rm -rf " + final_path + "/web_static/")
     run("ln -s {} /data/web_static/current".format(final_path))
+
+    disconnect_all()
 
     return True
