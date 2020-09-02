@@ -67,3 +67,7 @@ class FileStorage:
         if key in self.all().keys():
             self.all().pop(key)
             self.save()
+
+    def close(self):
+        """Calll method for deserializing the JSON file to objects."""
+        self.reload()
