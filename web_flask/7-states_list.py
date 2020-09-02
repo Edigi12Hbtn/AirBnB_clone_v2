@@ -15,9 +15,8 @@ def states():
     list = []
     for val in states.values():
         list.append(val)
-#    print(states)
-#    return "All ok."
     return render_template('7-states_list.html', states=list)
+
 
 @app.teardown_appcontext
 def teardown_appcontext(arg):
