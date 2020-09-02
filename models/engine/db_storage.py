@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Defines DBStorage class as another optional engine."""
 from sqlalchemy import (create_engine)
-from os import environ
+from os import getenv
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import BaseModel, Base
@@ -15,11 +15,11 @@ class DBStorage:
     def __init__(self):
         """init method for DBStorage class."""
 
-        drop = environ['HBNB_ENV']
-        host = environ['HBNB_MYSQL_HOST']
-        user = environ['HBNB_MYSQL_USER']
-        pwd = environ['HBNB_MYSQL_PWD']
-        db = environ['HBNB_MYSQL_DB']
+        drop = getenv('HBNB_ENV')
+        host = getenv('HBNB_MYSQL_HOST')
+        user = getenv('HBNB_MYSQL_USER')
+        pwd = getenv('HBNB_MYSQL_PWD')
+        db = getenv('HBNB_MYSQL_DB')
 
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@{}:3306/{}'.format(
@@ -83,3 +83,4 @@ class DBStorage:
     def close(self):
         """Call method on the private session attribute (self.__session)."""
         self.__session.close()
+
