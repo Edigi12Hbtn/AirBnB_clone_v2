@@ -11,6 +11,7 @@ def hello_world():
     """Flask Hello World."""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb')
 def hbnb():
     """Manage hbnb route."""
