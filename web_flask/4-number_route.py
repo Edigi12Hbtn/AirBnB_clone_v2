@@ -11,10 +11,12 @@ def hello_world():
     """Flask Hello World."""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb')
 def hbnb():
     """Manage hbnb route."""
     return "HBNB"
+
 
 @app.route('/c/<text>')
 def text_func(text):
@@ -22,12 +24,14 @@ def text_func(text):
     text = text.replace('_', ' ')
     return "{} {}".format('C', text)
 
+
 @app.route('/python/', defaults={'text': 'is cool'})
 @app.route('/python/<text>')
 def python_func(text):
     """handling with optional route."""
     text = text.replace('_', ' ')
     return "{} {}".format('Python', text)
+
 
 @app.route('/number/<int:n>')
 def number_int(n):
