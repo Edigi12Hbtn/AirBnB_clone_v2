@@ -1,34 +1,35 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from models.base_model import BaseModel, Base
-from models.city import City
-import models
 from os import getenv
+import models
+from models.city import City
 
-
-type_engine = getenv('HBNB_TYPE_STORAGE')
+type_db = getenv('HBNB_TYPE_STORAGE')
 
 
 class State(BaseModel, Base):
-    """ The city class, contains state ID and name """
-    # for dbstorage:
+    """ State class """
     __tablename__ = 'states'
-    if type_engine == 'db':
-        name = Column(
-            'name',
-            String(128),
-            nullable=False
-        )
-        cities = relationship('City', cascade="all, delete", backref="state")
-    # for filestorage:
-    else:
+
+    if type_db == 'db':  # database
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", backref='state',
+                              cascade="all, delete-orphan")
+
+        @property
+        def cities(self):
+            """Getter method for class attr cities."""
+            return type(self).cities
+
+    else:  # file storage
         name = ''
 
         @property
         def cities(self):
-            """ Getter method for  return all cities of a state"""
+            """getter method."""
             cities = []
 
             for key, city in models.storage.all(City).items():
