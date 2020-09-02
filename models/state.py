@@ -9,11 +9,12 @@ from models.city import City
 
 type_db = getenv('HBNB_TYPE_STORAGE')
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
 
-    if type_db == 'db':  #database
+    if type_db == 'db':  # database
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref='state',
                               cascade="all, delete-orphan")
