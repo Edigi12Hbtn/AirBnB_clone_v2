@@ -31,7 +31,7 @@ class Place(BaseModel, Base):
     reviews = relationship("Review", backref='place',
                            cascade="all, delete-orphan")
 
-    amenities = relationship("Amenity", secondary=place_amenity)
+#    amenities = relationship("Amenity", secondary=place_amenity)
 
     @property
     def reviews(self):
