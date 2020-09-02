@@ -11,16 +11,19 @@ def hello_world():
     """Flask Hello World."""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb')
 def hbnb():
     """Manage hbnb route."""
     return "HBNB"
+
 
 @app.route('/c/<text>')
 def text_func(text):
     """returns text in path: /c/<text>"""
     text = text.replace('_', ' ')
     return "{} {}".format('C', text)
+
 
 @app.route('/python/', defaults={'text': 'is cool'})
 @app.route('/python/<text>')
