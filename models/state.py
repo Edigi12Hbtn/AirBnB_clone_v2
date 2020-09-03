@@ -19,11 +19,6 @@ class State(BaseModel, Base):
         cities = relationship("City", backref='state',
                               cascade="all, delete-orphan")
 
-        @property
-        def cities(self):
-            """Getter method for class attr cities."""
-            return type(self).cities
-
     else:  # file storage
         name = ''
 
