@@ -8,11 +8,12 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.jinja_env.add_extension('jinja2.ext.do')
 
+
 @app.route('/states/')
 @app.route('/states/<id>')
 def states_id(id=0):
     """displays HTML."""
-    states = storage.all(State) 
+    states = storage.all(State)
     return render_template('9-states.html', states=states, id=id)
 
 
